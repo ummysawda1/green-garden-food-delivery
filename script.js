@@ -1,4 +1,4 @@
-// Sample Data for Menu List
+// Data for Menu List
 const menuList = [
     {
         menu_name: "Salad",
@@ -26,7 +26,7 @@ const menuList = [
     }
 ];
 
-// Sample data for food items
+// data for food items
 const foodItems = [
     {
         name: "Endive Salad with Walnuts",
@@ -68,7 +68,7 @@ const foodItems = [
 
 
 
-// Populate Swiper Slides with Menu List
+// Swiper Slides with Menu List
 menuList.forEach(item => {
     const slide = document.createElement('div');
     slide.classList.add('swiper-slide');
@@ -108,10 +108,7 @@ const swiper = new Swiper('.swiper-container', {
     }
 });
 
-// Handle Sign In Button Click
-document.getElementById('sign-in-btn').addEventListener('click', () => {
-    alert('Sign in functionality is not implemented yet.');
-});
+
 
 // Smooth scroll to Explore Menu section
 document.getElementById('view-menu-btn').addEventListener('click', () => {

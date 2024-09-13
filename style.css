@@ -140,7 +140,7 @@ i:hover{
 
 .header-content p{
     color: white;
-    font-size: clamp(13px, 1vw, 18px);
+    font-size: 18px;
     line-height: 1.5;
 }
 
@@ -150,7 +150,7 @@ i:hover{
     font-weight: 500;
     padding: 1vw 2.3vw;
     background-color: white;
-    font-size: clamp(13px, 1vw, 16px);
+    font-size: 16px;
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -312,9 +312,7 @@ i:hover{
     overflow-x: scroll;
 }
 
-.explore-menu-list::-webkit-scrollbar {
-    display: none;
-}
+
 
 /* Menu Item Styling */
 .explore-menu-list-item img {
