@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Garden Food Delivery</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Swiper CSS -->
     <link
       rel="stylesheet"
@@ -16,39 +23,150 @@
 />
 </head>
 <body >
-    <header>
-        <!-- Navbar Section -->
-        <nav>
-            <div class="navbar app">
-                <img src="assets/logo.png" alt="GreenGarden Logo" class="logo" />
-                <ul class="navbar-menu">
-                    <li data-menu="home" class="active">Home</li>
-                    <li data-menu="menu">Menu</li>
-                    <li data-menu="services">Services</li>
-                    <li data-menu="contact-us">Contact Us</li>
-                </ul>
-                <div class="navbar-right">
-                    <i class="icon ri-search-line"></i>
-                   
-                    <div class="navbar-search-icon">
-                        <i class="icon ri-shopping-cart-fill"></i>
-                       
-                        <div class="dot"></div>
-                    </div>
-                    <button id="sign-in-btn">Sign in</button>
+    <header class="relative">
+    <!-- Navbar Section -->
+    <nav class="md:px-32 bg-white py-5 px-4  z-10 relative">
+        <div class="container mx-auto hidden md:flex justify-between items-center">
+            <!-- Logo -->
+            <img src="assets/logo.webp" alt="GreenGarden Logo" class="w-64">
+
+            <!-- Navbar Menu -->
+            <ul class="hidden md:flex space-x-6 text-gray-700 text-lg font-medium">
+                <li class="cursor-pointer border-b-2 border-green-500 pb-1"><a href="#">Home</a></li>
+                <li class="cursor-pointer hover:text-green-500 transition duration-300"><a href="#food-menu">Menu</a></li>
+                <li class="cursor-pointer hover:text-green-500 transition duration-300"><a href="#services">Services</a></li>
+                <li class="cursor-pointer hover:text-green-500 transition duration-300"><a href="#contact">Contact Us</a></li>
+            </ul>
+
+            <!-- Navbar Right Section -->
+            <div class=" flex items-center space-x-6">
+                <!-- Cart Icon -->
+                <div id="cart" class="hidden md:block relative">
+                    <i class="ri-shopping-cart-fill text-xl text-gray-500 hover:text-green-500 transition duration-300 cursor-pointer"></i>
+                    <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full"></span>
                 </div>
-            </div>
-        </nav>
-        
-        <!-- Hero Section -->
-        <div class="header app">
-            <div class="header-content">
-                <h2>Order your favourite food here</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quos, incidunt molestias cum quo debitis ducimus ut officiis obcaecati distinctio. Reiciendis alias consectetur magnam, corrupti velit ullam ipsam debitis eos!</p>
-                <button id="view-menu-btn">View Menu</button>
+
+                <!-- Sign-in Button -->
+                <button id="sign-in-btn" class="text-gray-700 border border-green-500 rounded-full px-6 py-2 hover:bg-green-500 hover:text-white transition duration-300">
+                    Sign in
+                </button>
             </div>
         </div>
-    </header>
+
+        <!-- Mobile View -->
+        <div class="flex md:hidden justify-between items-center">
+            <!-- Logo -->
+            <img src="assets/logo.webp" alt="GreenGarden Logo" class="w-40">
+            <!-- Sign-in Button -->
+            <button id="sign-in-btn" class="text-gray-700 border border-green-500 rounded-full px-4 py-2 hover:bg-green-500 hover:text-white transition duration-300">
+                Sign in
+            </button>
+        </div>
+    </nav>
+
+
+    <!-- Login modal -->
+<div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                <h3 class="text-xl font-semibold text-gray-900">
+                    Green Garden Food Delivery
+                </h3>
+                <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="authentication-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5">
+                <form class="space-y-4" id="login-form" method="post" action="#">
+                    <input type="hidden" name="action" value="login">
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="name@company.com" required />
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Your password</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" required />
+                    </div>
+                  
+                    <button type="submit" class="w-full text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login to your account</button>
+                    <div class="text-sm font-medium text-gray-500">
+                        Not registered? <a href="#" data-modal-hide="authentication-modal" data-modal-toggle="registration-modal" class="text-green-700 hover:underline">Create account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Registration modal -->
+<div id="registration-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                <h3 class="text-xl font-semibold text-gray-900">
+                    Register an account
+                </h3>
+                <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="registration-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5">
+                <form class="space-y-4" id="register-form" method="post" action="#">
+                    <input type="hidden" name="action" value="register">
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="name@company.com" required />
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Choose a password</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" required />
+                    </div>
+                    <div>
+                        <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900">Full Name</label>
+                        <input type="text" name="fullname" id="fullname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="Your full name" required />
+                    </div>
+                    <div>
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Phone Number</label>
+                        <input type="tel" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="Your phone number" required />
+                    </div>
+                    <button type="submit" class="w-full text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register</button>
+                    <div class="text-sm font-medium text-gray-500">
+                        Already have an account? <a href="#" data-modal-hide="registration-modal" data-modal-toggle="authentication-modal" class="text-green-700 hover:underline">Sign in</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Hero Section -->
+    <div class="header app bg-cover bg-center h-[34vw] md:h-[60vh] my-8 relative overflow-hidden" style="background-image: url('assets/header_img.webp'); z-index: -1;">
+        <div id="hero-section" class="header-content absolute flex flex-col items-start gap-4 max-w-[90%] md:max-w-[50%] bottom-10 left-4 md:left-[6vw] animate-fadeIn">
+            <h2 class="font-medium text-white text-lg md:text-[4.5vw] leading-tight break-words">Order your favourite food here</h2>
+            <p class="text-white text-sm md:text-base leading-snug md:leading-relaxed">
+                Delicious, healthy, and fresh food delivered to your door. Order now and enjoy the best meals in town!
+            </p>
+            <button id="view-menu-btn" class="border-none text-gray-700 font-medium py-2 px-4 md:py-4 md:px-8 bg-white text-xs md:text-sm rounded-full cursor-pointer hover:bg-gray-200 transition duration-300">
+                View Menu
+            </button>
+        </div>
+    </div>
+</header>
+
+    
     
     <main>
         <!-- Explore Menu Section -->
@@ -76,15 +194,66 @@
 
     <hr />
 
+    <!-- Services Section -->
+    <section id="services" class="services-section" style="background: #f6fff0; padding: 60px 0;">
+      <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-8" style="color: #80cc28;">Our Services</h2>
+        <div class="flex flex-wrap justify-center gap-10">
+          <div class="service-card bg-white rounded-lg shadow-md p-6 flex flex-col items-center w-64">
+            <img src="assets/basket_icon.webp" alt="Fast Delivery" class="w-16 mb-4">
+            <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
+            <p>Get your food delivered hot and fresh in record time, right to your doorstep.</p>
+          </div>
+          <div class="service-card bg-white rounded-lg shadow-md p-6 flex flex-col items-center w-64">
+            <img src="assets/food_1.webp" alt="Fresh Food" class="w-16 mb-4 rounded-full">
+            <h3 class="text-xl font-semibold mb-2">Fresh Food</h3>
+            <p>We use only the freshest ingredients to prepare your favorite meals every day.</p>
+          </div>
+          <div class="service-card bg-white rounded-lg shadow-md p-6 flex flex-col items-center w-64">
+            <img src="assets/search_icon.webp" alt="24/7 Support" class="w-16 mb-4">
+            <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
+            <p>Our support team is available around the clock to help you with your orders.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="contact-section" style="background: #eaffea; padding: 60px 0;">
+      <div class="container mx-auto flex flex-col md:flex-row items-center justify-center gap-0">
+        <div class="contact-info flex-1 text-center md:text-left md:ml-16">
+          <h2 class="text-3xl font-bold mb-6" style="color: #80cc28;">Contact Us</h2>
+          <p class="mb-4"><img src="assets/phone_icon.webp" alt="Phone" class="inline w-6 mr-2">(+880) 1985456681</p>
+          <p class="mb-4"><img src="assets/email_icon.webp" alt="Email" class="inline w-6 mr-2">sawda241-35-520@diu.edu.bd</p>
+          <p>We'd love to hear from you! Reach out for any questions or feedback.</p>
+        </div>
+        <form class="contact-form flex-1 bg-white rounded-lg shadow-md p-8 max-w-md w-full mx-auto md:mr-16">
+          <div class="mb-4">
+            <label class="block text-gray-700 mb-2" for="name">Name</label>
+            <input class="w-full px-3 py-2 border border-gray-300 rounded" type="text" id="name" name="name" required>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 mb-2" for="email">Email</label>
+            <input class="w-full px-3 py-2 border border-gray-300 rounded" type="email" id="email" name="email" required>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 mb-2" for="message">Message</label>
+            <textarea class="w-full px-3 py-2 border border-gray-300 rounded" id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition" type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
       <!-- Banner Section -->
       <section class="app-banner">
         <h2>For Better Experience Download Green Garden App</h2>
         <div class="app-store-buttons">
             <a href="#" class="store-btn">
-                <img src="assets/play_store.png" alt="Google Play" />
+                <img src="assets/play_store.webp" alt="Google Play" />
             </a>
             <a href="#" class="store-btn">
-                <img src="assets/app_store.png" alt="App Store" />
+                <img src="assets/app_store.webp" alt="App Store" />
             </a>
         </div>
     </section>
@@ -95,11 +264,11 @@
     <div class="footer-container">
         <div class="footer-brand">
             <img src="./assets/Green.png" alt="">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+            <p>Green Garden delivers fresh, healthy, and delicious meals to your doorstep. Experience quality and taste with every order.</p>
             <div class="social-icons">
-                <a href="#"><img src="assets/facebook_icon.png" alt="Facebook"></a>
-                <a href="#"><img src="assets/twitter_icon.png" alt="Twitter"></a>
-                <a href="#"><img src="assets/linkedin_icon.png" alt="LinkedIn"></a>
+                <a href="#"><img src="assets/facebook_icon.webp" alt="Facebook"></a>
+                <a href="#"><img src="assets/twitter_icon.webp" alt="Twitter"></a>
+                <a href="#"><img src="assets/linkedin_icon.webp" alt="LinkedIn"></a>
             </div>
         </div>
         <div class="footer-links">
@@ -114,7 +283,7 @@
         <div class="footer-contact">
             <h4>Get in Touch</h4>
             <p>(+880) 1985456681</p>
-            <p>sifat@dev</p>
+            <p>sawda241-35-520@diu.edu.bd</p>
         </div>
     </div>
 </footer>
